@@ -9,7 +9,7 @@ var CONNECTION_URL = "mongodb+srv://uainnovate:qhHSn7lPYrcSRFvN@cluster0.fdvzwdt
 var DATABASE_NAME = "uainnovatedb";
 var database, client;
 
-app.listen(4200, () => {
+app.listen(5038, () => {
     MongoClient.connect(CONNECTION_URL, (error, dbClient) => {
         if (error) {
             console.error('Error occurred while connecting to MongoDB Atlas...\n', error);
@@ -19,7 +19,7 @@ app.listen(4200, () => {
         client = dbClient;
         database = client.db(DATABASE_NAME);
         console.log("Mongo DB Connection Successful");
-        console.log("Server is running on port 4200");
+        console.log("Server is running on port 5038");
     });
 });
 
@@ -36,6 +36,18 @@ app.get('/api/GetData', (request, response) => {
     collection.find({}).toArray((error, result) => {
         if (error) {
             console.error('Error occurred while fetching data from MongoDB Atlas...\n', error);
+            response.status(500).send('Internal Server Error');
+            return;
+        }
+
+        response.send(result);
+    });
+});
+
+app.post('/api/AddStudent', (formData, response) => {
+    database.collection("uainnovatecollection").insertOne(formData.body, (error, result) => {
+        if (error) {
+            console.error('Error occurred while adding data to MongoDB Atlas...\n', error);
             response.status(500).send('Internal Server Error');
             return;
         }
