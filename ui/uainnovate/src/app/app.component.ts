@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'uainnovate';
+
+export class AppComponent implements OnInit {
+  data: any[] = [];
+
+  ngOnInit() {
+    fetch('http://localhost:5038/api/GetData')
+      .then(response => response.json())
+      .then(data => this.data = data)
+      .catch(error => console.error('Error:', error));
+  }
 }
