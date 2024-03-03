@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class SubmitStudentComponent implements OnInit {
   jobApplicationForm: FormGroup = {} as FormGroup;
   officeLocations = ['Location 1', 'Location 2', 'Location 3', 'Location 4'];
-
+  resumeFile: any;
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -32,10 +32,33 @@ export class SubmitStudentComponent implements OnInit {
     });
   }
 
+  onFileChange(event: Event): void {
+      const target = event.target as HTMLInputElement;
+      if (target.files && target.files.length > 0) {
+        this.resumeFile = target.files[0];
+      }
+  }
+
   onSubmit(): void {
+    console.log("onsubmit");
     if (this.jobApplicationForm.valid) {
+
+      const formData = new FormData();
+
+      // Append all form values to formData
+      for (const key in this.jobApplicationForm.value) {
+        formData.append(key, this.jobApplicationForm.value[key]);
+      }
+
+      console.log("here");
+
+      // Append the file to formData
+      // Assume the file is stored in this.resumeFile
+      formData.append('resume', this.resumeFile);
+
       // Send data to the server04 Not Fou
-      this.http.post('http://localhost:5038/api/AddStudent', this.jobApplicationForm.value)
+      console.log("here2");
+      this.http.post('http://localhost:5038/api/AddStudent', formData)
         .subscribe(
           response => {
             console.log('Submission successful:', response);
@@ -46,6 +69,9 @@ export class SubmitStudentComponent implements OnInit {
             console.error('Error submitting application:', error);
           }
         );
+    }
+    else{
+      console.log("Invalid form");
     }
   }
 }

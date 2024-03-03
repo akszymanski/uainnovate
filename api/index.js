@@ -1,7 +1,11 @@
 var Express = require("express");
 var MongoClient = require("mongodb").MongoClient;
+const fs = require('fs');
 var cors = require("cors");
 var multer = require("multer");
+GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
+
+
 
 var app = Express();
 app.use(cors());
@@ -11,6 +15,18 @@ app.use(Express.json());
 var CONNECTION_URL = "mongodb+srv://uainnovate:qhHSn7lPYrcSRFvN@cluster0.fdvzwdt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 var DATABASE_NAME = "uainnovatedb";
 var database, client;
+
+const storage = new GridFsStorage({
+    url: CONNECTION_URL,
+    file: (req, file) => {
+      return {
+        bucketName: 'resumes',       // Setting the collection name for the files
+        filename: `${req.body.email}`  // The name under which the file will be stored
+      }
+    }
+  });
+
+const upload = multer({ storage });
 
 app.listen(5038, () => {
     MongoClient.connect(CONNECTION_URL, (error, dbClient) => {
@@ -153,7 +169,7 @@ app.post('/api/UpdateStudent', multer().none(), (request, response) => {
 });
 
 
-app.post('/api/AddStudent', multer().none(), (request, response) => {
+app.post('/api/AddStudent', upload.single('resume'), (request, response) => {
     console.log("In post");
     console.log(request.body);
     const collection = database.collection("uainnovatecollection");
@@ -178,9 +194,12 @@ app.post('/api/AddStudent', multer().none(), (request, response) => {
             console.error('Error inserting document: ', error);
             response.status(500).send(error);
         } else {
+            console.log(request.file);
             response.send(result);
         }
     });
+    
+    
 });
 
 
