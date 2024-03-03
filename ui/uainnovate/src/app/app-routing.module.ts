@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'update-student', component: UpdateStudentComponent}
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

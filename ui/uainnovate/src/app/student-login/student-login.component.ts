@@ -29,13 +29,37 @@ export class StudentLoginComponent implements OnInit {
     if (this.jobApplicationForm.valid) {
       // Send data to the server
       console.log(this.jobApplicationForm.value);
-      this.http.get('http://localhost:5038/api/GetStudent/' + this.jobApplicationForm.value.email, this.jobApplicationForm.value)
+      console.log(this.jobApplicationForm.value.email);
+      var email = this.jobApplicationForm.value.email;
+      this.http.get('http://localhost:5038/api/GetStudent/' + this.jobApplicationForm.value.email)
         .subscribe(
           response => {
             console.log('Submission successful:', response);
+            console.log('Done');
 
             if(response != null){
-              this.router.navigate(['/update-student'], { state: { email: this.jobApplicationForm.value.email } });
+              this.http.get('http://localhost:5038/api/GetStudentFile/' + email, { responseType: 'blob' })
+              .subscribe(
+                  file => {
+                      console.log('Received file:', file);
+
+                      // Handle the file
+                      let url = URL.createObjectURL(file);
+                      let link = document.createElement('a');
+                      link.href = url;
+                      link.download = `${email}.pdf`;
+                      link.click();
+
+                      // Optionally, reset the form after successful submission
+                      this.jobApplicationForm.reset();
+
+                      // Navigate to the update-student route
+                      this.router.navigate(['/update-student'], { state: { email: email } });
+                  },
+                  error => {
+                      console.error('Error getting file:', error);
+                  }
+              );
             }
 
 
@@ -46,6 +70,9 @@ export class StudentLoginComponent implements OnInit {
             console.error('Error submitting application:', error);
           }
         );
+    }
+    else{
+      console.log("Form is invalid");
     }
   }
 }
