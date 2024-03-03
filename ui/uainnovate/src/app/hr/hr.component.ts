@@ -157,7 +157,6 @@ submitChanges() {
     university: any;
     role: any;
     officeLocations: any;
-    resume: any;
     interviewStage: any;
     interviewFeedback: any;
     evaluationMetric: any;
@@ -175,7 +174,6 @@ submitChanges() {
     university: this.itemForm.get('university')?.value,
     role: this.itemForm.get('role')?.value,
     officeLocations: this.itemForm.get('locations')?.value,
-    resume: this.itemForm.get('resume')?.value,
     interviewStage: this.itemForm.get('interviewStage')?.value,
     interviewFeedback: this.itemForm.get('interviewFeedback')?.value,
     evaluationMetric: this.itemForm.get('evaluation')?.value,

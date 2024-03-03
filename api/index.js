@@ -67,13 +67,13 @@ app.get('/api/GetData', (request, response) => {
 
 
 //CRUD operations for HR
-app.post('/api/AddStudentHR', multer().none(), (request, response) => {
+app.post('/api/AddStudentHR',  upload.single('resume'), (request, response) => {
     console.log("In post");
     console.log(request.body);
     //const obj = JSON.parse(request.body);
     const collection = database.collection("uainnovatecollection");
     const newStudent = {
-        _id: request.body.email,
+        _id: request.body._id,
         firstName: request.body.firstName,
         lastName: request.body.lastName,
         phone: request.body.phone,
@@ -102,7 +102,7 @@ app.post('/api/UpdateStudentHR', multer().none(), (request, response) => {
     console.log(request.body);
     const collection = database.collection("uainnovatecollection");
     const newStudent = {
-        _id: request.body.email,
+        _id: request.body._id,
         firstName: request.body.firstName,
         lastName: request.body.lastName,
         phone: request.body.phone,
@@ -116,7 +116,7 @@ app.post('/api/UpdateStudentHR', multer().none(), (request, response) => {
         evaluationMetric: request.body.evaluationMetric
 
     };
-    collection.updateOne({ _id: request.body.email }, { $set: newStudent }, (error, result) => {
+    collection.updateOne({ _id: request.body._id }, { $set: newStudent }, (error, result) => {
         if (error) {
             console.error('Error inserting document: ', error);
             response.status(500).send(error);
@@ -202,6 +202,29 @@ app.post('/api/AddStudent', upload.single('resume'), (request, response) => {
     });
     
     
+});
+
+app.get('/api/SearchStudents/:firstName/:lastName', (request, response) => {
+    const collection = database.collection("uainnovatecollection");
+    console.log(request.params.firstName);
+    console.log(request.params.lastName);
+    if (request.params.firstName == "null") {
+        request.params.firstName = "";
+    }
+    if (request.params.lastName == "null") {
+        request.params.lastName = "";
+    }
+    
+    //const name = firstName + " " + lastName;
+    collection.find({ $or: [{ firstName: request.params.firstName }, { lastName: request.params.lastName }, {lastName: request.params.firstName}, {firstName: request.params.lastName}] }).toArray((error, result) => {
+        if (error) {
+            console.error('Error occurred while fetching data from MongoDB Atlas...\n', error);
+            response.status(500).send('Internal Server Error');
+            return;
+        }
+
+        response.send(result);
+    });
 });
 
 

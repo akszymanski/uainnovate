@@ -2,10 +2,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <body *ngIf="showForm">
 <div class="form-container" >
-    <div>
-        <h2>Candidate</h2>
-    </div>
     <form id="viewCandidateForm" [formGroup]="itemForm">
+        <title>View Applicant</title>
         <h4>View Applicant</h4>
         <label>
             First Name:
@@ -44,10 +42,6 @@
             <input type="text" formControlName="locations">
             </label>
         <label>
-            Resume:
-            <button (click)="downloadResume()">View Resume</button>
-        </label>
-        <label>
             Interview Stage:
             <input type="text" formControlName="interviewStage">
         </label>
@@ -73,7 +67,7 @@
     <div class="container">
         <div>
             <button (click)="deleteSelected()" type="button" id="deleteSelected">Delete Selected</button>
-            <button type="button" id="addApplicant">Add Applicant</button>
+            <button type="button" id="addApplicant" routerLink="/create-student-hr">Add Applicant</button>
             <button (click)="resetTable()" type="button" id="reset">Reset Table</button>
         </div>
         <form (submit)="onSearch(); $event.preventDefault()" class="search-form">
@@ -95,7 +89,6 @@
                 <th class="university">University</th>
                 <th class="role">Role</th>
                 <th class="locations">Locations</th>
-                <th class="resume">Resume</th>
                 <th class="interviewStage">Interview Stage</th>
                 <th class="interviewFeedback">Interview Feedback</th>
                 <th class="evaluation">Evaluation </th>

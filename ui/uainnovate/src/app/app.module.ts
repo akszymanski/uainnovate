@@ -19,10 +19,10 @@ import { CreateStudentHRComponent } from './create-student-hr/create-student-hr.
         AppComponent,
         HomeComponent,
         SubmitStudentComponent,
+        CreateStudentHRComponent,
         StudentComponent,
         StudentLoginComponent,
         UpdateStudentComponent,
-        CreateStudentHRComponent,
     ],
     imports: [
         BrowserModule,

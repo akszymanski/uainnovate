@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubmitStudentComponent implements OnInit {
   jobApplicationForm: FormGroup = {} as FormGroup;
-  officeLocations = ['Location 1', 'Location 2', 'Location 3', 'Location 4'];
+  officeLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile']; 
   resumeFile: any;
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 

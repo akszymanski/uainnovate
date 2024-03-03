@@ -5,6 +5,7 @@ tr:nth-child(even) {
   h2 {
     text-align: center;
     margin-bottom: 20px;
+    font-style: "Source Sans Pro", Arial;
   }
 
   table {
@@ -14,6 +15,7 @@ tr:nth-child(even) {
   }
   
   td, th {
+    font-style: "Source Sans Pro", Arial;
     width: auto; /* This allows the browser to automatically manage the width of the columns */
   }
 
@@ -37,21 +39,26 @@ tr:nth-child(even) {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
     form {
+        font-style: "Source Sans Pro", Arial;
         display: flex;
         flex-direction: column;
         width: 100%;
+        font-size: 20px;
       }
 
       label {
+        font-style: "Source Sans Pro", Arial;
         display: flex;
         flex-direction: column;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        size: auto;
       }
   }
   
   body {
+    font-style: "Source Sans Pro", Arial;
     margin: 0;
-    height: 100vh;
+    height: 150vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +77,21 @@ tr:nth-child(even) {
     font-size: 16px;
     text-align: center;
     cursor: pointer;
-    background-color: red;
+    background-color: #E31937;
+    color: white;
+    border: none;
+    border-radius: 50px; /* This makes the button rounded */
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  #editModeButton, #isEditMode{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #52364B;
     color: white;
     border: none;
     border-radius: 50px; /* This makes the button rounded */
@@ -84,7 +105,7 @@ tr:nth-child(even) {
     font-size: 16px;
     text-align: center;
     cursor: pointer;
-    background-color: blue;
+    background-color: #52364B;
     color: white;
     border: none;
     border-radius: 50px; /* This makes the button rounded */
@@ -98,7 +119,7 @@ tr:nth-child(even) {
     font-size: 16px;
     text-align: center;
     cursor: pointer;
-    background-color: green;
+    background-color: #52364B;
     color: white;
     border: none;
     border-radius: 50px; /* This makes the button rounded */
