@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SubmitStudentComponent } from './submit-student/submit-student.component';
 import { StudentComponent } from './student/student.component';
+import { StudentLoginComponent } from './student-login/student-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateStudentComponent } from './update-student/update-student.component';
 
@@ -15,7 +16,7 @@ import { UpdateStudentComponent } from './update-student/update-student.componen
         HomeComponent, // Add HomeComponent to imports
         SubmitStudentComponent,
         StudentComponent,
-        UpdateStudentComponent,
+        StudentLoginComponent,
     ],
     imports: [
         BrowserModule,
