@@ -1,5 +1,12 @@
+<body>
+
 <div class="form-container">
+        
         <form [formGroup]="jobApplicationForm" (ngSubmit)="onSubmit()" class="form-content">
+            <!-- <div class="form-group">
+                <label class="form-label">Please Input Your Data</label>
+            </div> -->
+            <title>Please Input Your Data</title>
             <div class="form-group">
                 <label class="form-label" for="firstName">First Name:</label>
                 <input type="text" id="firstName" formControlName="firstName" class="form-control">
@@ -17,14 +24,14 @@
                 <input type="tel" id="phone" formControlName="phone" class="form-control">
             </div>
             <div class="form-group">
-                <label class="form-label" for="officeLocations">Office Locations (ctrl select to select more than one):</label>
+                <label class="form-label" for="officeLocations">Office Locations (ctrl-select to select more than one):</label>
                 <select id="officeLocations" formControlName="officeLocations" multiple class="form-control">
                     <option *ngFor="let location of officeLocations" [value]="location">{{location}}</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group">      
                 <label class="form-label" for="resume">Resume:</label>
-                <input type="file" id="resume" formControlName="resume" class="form-control">
+                <input type="file" name="resume" id="resume" formControlName="resume" class="form-control" (change)="onFileChange($event)">
             </div>
             <div class="form-group">
                 <label class="form-label" for="graduationDate">Graduation Date:</label>
@@ -41,4 +48,6 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-
+    </form>
+</div>
+</body>

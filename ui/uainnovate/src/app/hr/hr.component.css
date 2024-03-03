@@ -54,7 +54,7 @@ tr:nth-child(even) {
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: top;
+    align-items: center;
     background: linear-gradient(to right, purple, red);
   }
 

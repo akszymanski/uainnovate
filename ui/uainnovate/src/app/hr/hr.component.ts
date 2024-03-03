@@ -8,13 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-hr',
   templateUrl: './hr.component.html',
-  styleUrl: './hr.component.css'
+  styleUrls: ['./hr.component.css'],
 })
 export class HrComponent implements OnInit {
   itemForm: FormGroup = {} as FormGroup;
   data: any[] = [];
   searchQuery: string = '';
   showForm = false;
+  resumeLink: any;
   successMessage: string | null = null;
   possibleLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile', 'Location1', 'Location2', 'Location3', 'Location4', 'Location5'];
 
@@ -62,6 +63,8 @@ export class HrComponent implements OnInit {
 
   viewItem(item: any): void {
     this.showForm = true;
+    var pdflink: any;
+
     this.itemForm.patchValue({
       'firstName': item.firstName,
       'lastName': item.lastName,
@@ -72,14 +75,58 @@ export class HrComponent implements OnInit {
       'university': item.university,
       'role': item.role,
       'locations': item.officeLocations,
-      'resume': item.resume,
       'interviewStage:': item.interviewStage,
       'interviewFeedback': item.interviewFeedback,
       'evaluation': item.evaluationMetric,
     });
+
+    this.http.get('http://localhost:5038/api/GetStudent/' + item._id + '/')
+    .subscribe(
+      response => {
+        console.log('Submission successful:', response);
+        console.log('Done');
+        this.http.get('http://localhost:5038/api/GetStudentFile/' + item._id, { responseType: 'blob' })
+          .subscribe(
+            file => {
+              console.log('Received file:', file);
+
+              // Handle the file
+              let url = URL.createObjectURL(file);
+              let link = document.createElement('a');
+              link.href = url;
+              link.download = `${item._id}.pdf`;
+              pdflink = link;
+              this.resumeLink = pdflink;
+              link.click();
+
+              console.log('Resume link:', pdflink); // Log the generated link
+
+              this.itemForm.patchValue({
+                'resume': pdflink,
+              });
+
+            },
+            error => {
+              console.error('Error getting file:', error);
+            }
+          );
+      },
+      error => {
+        console.error('Error submitting application:', error);
+      }
+    );
+
+        
+
   }
 
   isEditMode = false;
+
+  downloadResume(): void {
+    if (this.resumeLink) {
+        this.resumeLink.click();
+    }
+}
 
 updateItem() {
   // Enable all form controls

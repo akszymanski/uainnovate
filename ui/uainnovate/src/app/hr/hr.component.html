@@ -45,7 +45,7 @@
             </label>
         <label>
             Resume:
-            <input type="text" formControlName="resume">
+            <button (click)="downloadResume()">View Resume</button>
         </label>
         <label>
             Interview Stage:
@@ -117,7 +117,6 @@
                 <td>{{item.university}}</td>
                 <td>{{item.role}}</td>
                 <td>{{item.officeLocations}}</td>
-                <td>{{item.resume}}</td>
                 <td>{{item.interviewStage}}</td>
                 <td>{{item.interviewFeedback}}</td>
                 <td>

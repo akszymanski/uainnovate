@@ -10,6 +10,8 @@ import { StudentLoginComponent } from './student-login/student-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateStudentComponent } from './update-student/update-student.component';
 import { HrModule } from './hr/hr.module';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -22,10 +24,12 @@ import { HrModule } from './hr/hr.module';
     ],
     imports: [
         BrowserModule,
-        HrModule,
+        RouterModule,
         HttpClientModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
+        AppRoutingModule, 
+        ReactiveFormsModule,// Use AppRoutingModule instead of RouterModule here
+        HrModule,
+        FormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
