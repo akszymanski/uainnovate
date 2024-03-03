@@ -1,0 +1,140 @@
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%; /* Make sure the table takes up the full width of its container */
+    table-layout: fixed; /* This makes the columns of equal width */
+    margin-top: 20px;
+  }
+  
+  td, th {
+    width: auto; /* This allows the browser to automatically manage the width of the columns */
+  }
+
+  td.checkbox-column, th.checkbox-column{
+    width: 40px; /* Adjust as needed */
+  }
+  
+  .view-column {
+    width: 40px;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+      }
+  }
+  
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, purple, red);
+  }
+
+  
+  input {
+    margin-top: 5px;
+  }
+
+
+  #deleteSelected, #showForm, #updateItem {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50px; /* This makes the button rounded */
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  #addApplicant {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 50px; /* This makes the button rounded */
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  #reset {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 50px; /* This makes the button rounded */
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .search-form {
+    text-align: right; /* Aligns the content to the right */
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-form input[type="search"] {
+    width: 200px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    margin-right: 10px; /* Adds some space between the input and the button */
+  }
+  
+  .search-form button {
+    height: 40px; /* Adjust as needed */
+  }
+
+  tr {
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+ 
+

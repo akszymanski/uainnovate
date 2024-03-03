@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UpdateStudentComponent {
   jobApplicationForm: FormGroup = {} as FormGroup;
-  officeLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile'];
+  possibleLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile'];
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
@@ -19,11 +19,13 @@ export class UpdateStudentComponent {
     this.initForm();
   }
   email = '';
+  //result: any;
+  data: any = {};
   fname = '';
   lname = '';
   phone1 = '';
   role1 = '';
-  officelocations = '';
+  officeLocations = '';
   resume1 = null;
   graddate = ''
   university1 = '';
@@ -47,33 +49,18 @@ export class UpdateStudentComponent {
 
   private initForm(): void {
     this.jobApplicationForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      role: ['Full-Time', Validators.required],
-      officeLocations: [''],
-      resume: [null, Validators.required],
-      graduationDate: ['', Validators.required],
-      university: ['', Validators.required],
-      linkedin: ['']
+      firstName: [this.fname, Validators.required],
+      lastName: [this.lname, Validators.required],
+      email: [this.email, [Validators.required, Validators.email]],
+      phone: [this.phone1, Validators.required],
+      role: [this.role1, Validators.required],
+      officeLocations: [this.officeLocations],
+      resume: [this.resume1, Validators.required],
+      graduationDate: [this.graddate, Validators.required],
+      university: [this.university1, Validators.required],
+      linkedin: [this.linkedin1]
     });
 
-    // onSubmit(): void {
-    //   if (this.jobApplicationForm.valid) {
-    //     // Send data to the server04 Not Fou
-    //     this.http.post('http://localhost:5038/api/AddStudent', this.jobApplicationForm.value)
-    //       .subscribe(
-    //         response => {
-    //           console.log('Submission successful:', response);
-    //           // Optionally, reset the form after successful submission
-    //           this.jobApplicationForm.reset();
-    //         },
-    //         error => {
-    //           console.error('Error submitting application:', error);
-    //         }
-    //       );
-    //   }
-    // }
+
 }
 }
