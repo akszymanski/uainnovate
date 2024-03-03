@@ -11,12 +11,38 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UpdateStudentComponent {
   jobApplicationForm: FormGroup = {} as FormGroup;
-  officeLocations = ['Location 1', 'Location 2', 'Location 3', 'Location 4'];
+  officeLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile'];
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.initForm();
+  }
+  email = '';
+  fname = '';
+  lname = '';
+  phone1 = '';
+  role1 = '';
+  officelocations = '';
+  resume1 = null;
+  graddate = ''
+  university1 = '';
+  linkedin1 = '';
+  private getInfo(): void {
+    if (this.jobApplicationForm.valid){
+      this.http.get('http://localhost:5038/api/GetStudent/'+ this.email, this.jobApplicationForm.value)
+        .subscribe(
+          response => {
+            console.log('Submission successful:', response);
+            // Optionally, reset the form after successful submission
+            this.jobApplicationForm.reset();
+          },
+          error => {
+            console.error('Error submitting application:', error);
+          }
+        )
+      
+    }
   }
 
   private initForm(): void {
