@@ -4,19 +4,22 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { SubmitStudentComponent } from './submit-student/submit-student.component';
+import { StudentComponent } from './student/student.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent, // Add HomeComponent to imports
-        // Remove HomeComponent from declarations
-        // Include other components here if needed
+        SubmitStudentComponent,
+        StudentComponent,
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
-        AppRoutingModule, // Use AppRoutingModule instead of RouterModule here
-        
+        AppRoutingModule, 
+        ReactiveFormsModule,// Use AppRoutingModule instead of RouterModule here
     ],
     providers: [],
     bootstrap: [AppComponent]
