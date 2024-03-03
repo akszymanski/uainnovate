@@ -209,12 +209,14 @@ app.post('/api/AddStudent', upload.single('resume'), (request, response) => {
 app.get('/api/GetStudent/:email', (request, response) => {
 
     const collection = database.collection("uainnovatecollection");
+    console.log(request.params.email);
     collection.findOne({ _id: request.params.email }, (error, result) => {
         if (error) {
             console.error('Error occurred while fetching data from MongoDB Atlas...\n', error);
             response.status(500).send('Internal Server Error');
             return;
         }
+        console.log(response);
         response.send(result);
 
     });

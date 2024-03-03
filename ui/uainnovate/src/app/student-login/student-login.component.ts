@@ -54,6 +54,7 @@ export class StudentLoginComponent implements OnInit {
                       this.jobApplicationForm.reset();
 
                       // Navigate to the update-student route
+                      console.log('Navigating to update-student route'	);
                       this.router.navigate(['/update-student'], { state: { email: email } });
                   },
                   error => {

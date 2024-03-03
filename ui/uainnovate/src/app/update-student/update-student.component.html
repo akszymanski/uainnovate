@@ -1,7 +1,7 @@
 
 <div class="form-container">
     <!-- <form [formGroup]="jobApplicationForm" (ngSubmit)="onSubmit()" class="form-content"> -->
-    <form [formGroup]="jobApplicationForm" class="form-content">
+    <form [formGroup]="jobApplicationForm" class="form-content" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label class="form-label" for="firstName">First Name:</label>
             <input type="text" [(ngModel)]="this.fname" placeholder="First Name" id="firstName" formControlName="firstName" class="form-control">
@@ -32,6 +32,10 @@
         <div class="form-group">
             <label class="form-label" for="linkedin">LinkedIn URL:</label>
             <input type="text" [(ngModel)]="this.linkedin1" placeholder="Linkedin" id="linkedin" formControlName="linkedin" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="resume">Resume:</label>
+            <button (click)="downloadResume()">View Resume</button>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
