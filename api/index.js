@@ -84,7 +84,6 @@ app.post('/api/UpdateStudentHR', multer().none(), (request, response) => {
     console.log(request.body);
     const collection = database.collection("uainnovatecollection");
     const newStudent = {
-        _id: request.body.email,
         firstName: request.body.firstName,
         lastName: request.body.lastName,
         phone: request.body.phone,
@@ -96,17 +95,18 @@ app.post('/api/UpdateStudentHR', multer().none(), (request, response) => {
         interviewStage: request.body.interviewStage,
         interviewFeedback: request.body.interviewFeedback,
         evaluationMetric: request.body.evaluationMetric
-
     };
-    collection.updateOne({ _id: request.body.email }, { $set: newStudent }, (error, result) => {
+
+    collection.updateOne({ _id: request.body._id }, { $set: newStudent }, (error, result) => {
         if (error) {
-            console.error('Error inserting document: ', error);
+            console.error('Error updating document: ', error);
             response.status(500).send(error);
         } else {
             response.send(result);
         }
     });
 });
+
 
 
 //CRUD operations for HR and Student

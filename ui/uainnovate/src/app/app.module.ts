@@ -9,11 +9,12 @@ import { StudentComponent } from './student/student.component';
 import { StudentLoginComponent } from './student-login/student-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateStudentComponent } from './update-student/update-student.component';
+import { HrModule } from './hr/hr.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent, // Add HomeComponent to imports
+        HomeComponent,
         SubmitStudentComponent,
         StudentComponent,
         StudentLoginComponent,
@@ -21,9 +22,10 @@ import { UpdateStudentComponent } from './update-student/update-student.componen
     ],
     imports: [
         BrowserModule,
+        HrModule,
         HttpClientModule,
-        AppRoutingModule, 
-        ReactiveFormsModule,// Use AppRoutingModule instead of RouterModule here
+        AppRoutingModule,
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
