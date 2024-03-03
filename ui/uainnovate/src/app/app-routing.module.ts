@@ -6,6 +6,7 @@ import { HrComponent } from './hr/hr.component';
 import { SubmitStudentComponent } from './submit-student/submit-student.component';
 import { StudentLoginComponent } from './student-login/student-login.component';
 import { UpdateStudentComponent } from './update-student/update-student.component';
+import { CreateStudentHRComponent } from './create-student-hr/create-student-hr.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'submit-student', component: SubmitStudentComponent },
   { path: 'student-login', component: StudentLoginComponent},
   { path: 'update-student', component: UpdateStudentComponent},
+  { path: 'create-student-hr', component: CreateStudentHRComponent},
 ];
 
 @NgModule({
