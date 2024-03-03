@@ -8,6 +8,7 @@ import { SubmitStudentComponent } from './submit-student/submit-student.componen
 import { StudentComponent } from './student/student.component';
 import { StudentLoginComponent } from './student-login/student-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateStudentComponent } from './update-student/update-student.component';
 
 @NgModule({
     declarations: [
