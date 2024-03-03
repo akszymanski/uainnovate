@@ -17,6 +17,7 @@ import { UpdateStudentComponent } from './update-student/update-student.componen
         SubmitStudentComponent,
         StudentComponent,
         StudentLoginComponent,
+        UpdateStudentComponent,
     ],
     imports: [
         BrowserModule,
