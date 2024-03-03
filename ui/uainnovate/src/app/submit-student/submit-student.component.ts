@@ -24,7 +24,7 @@ export class SubmitStudentComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       role: ['Full-Time', Validators.required],
-      officeLocations: this.formBuilder.array([]),
+      officeLocations: [''],
       resume: [null, Validators.required],
       graduationDate: ['', Validators.required],
       university: ['', Validators.required],
@@ -34,8 +34,8 @@ export class SubmitStudentComponent implements OnInit {
 
   onSubmit(): void {
     if (this.jobApplicationForm.valid) {
-      // Send data to the server
-      this.http.post('http://localhost:5038/api/submitStudent', this.jobApplicationForm.value)
+      // Send data to the server04 Not Fou
+      this.http.post('http://localhost:5038/api/AddStudent', this.jobApplicationForm.value)
         .subscribe(
           response => {
             console.log('Submission successful:', response);
