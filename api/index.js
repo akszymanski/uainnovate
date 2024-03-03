@@ -67,7 +67,7 @@ app.get('/api/GetData', (request, response) => {
 
 
 //CRUD operations for HR
-app.post('/api/AddStudentHR', multer().none(), (request, response) => {
+app.post('/api/AddStudentHR', upload.single('resume'), (request, response) => {
     console.log("In post");
     console.log(request.body);
     //const obj = JSON.parse(request.body);
