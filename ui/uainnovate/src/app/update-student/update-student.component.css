@@ -47,4 +47,7 @@
     height: 50px; /* adjust as needed */
     font-size: 1.2em; /* adjust as needed */
   }
+  body {
+    padding-top: 100px; 
+  }
   
