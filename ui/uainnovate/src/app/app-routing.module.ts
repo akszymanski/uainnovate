@@ -14,9 +14,8 @@ const routes: Routes = [
   { path: 'hr', component: HrComponent },
   { path: 'submit-student', component: SubmitStudentComponent },
   { path: 'student-login', component: StudentLoginComponent},
-  { path: 'update-student', component: UpdateStudentComponent}
+  { path: 'update-student', component: UpdateStudentComponent},
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

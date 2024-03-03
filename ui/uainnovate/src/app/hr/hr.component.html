@@ -1,1 +1,122 @@
-<p>hr works!</p>
+<!-- Include Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<body *ngIf="showForm">
+<div class="form-container" >
+    <div>
+        <h2>Candidate</h2>
+    </div>
+    <form id="viewCandidateForm" [formGroup]="itemForm">
+        <h4>View Applicant</h4>
+        <label>
+            First Name:
+            <input type="text" formControlName="firstName">
+        </label>
+        <label>
+            Last Name:
+            <input type="text" formControlName="lastName">
+        </label>
+        <label>
+            Email:
+            <input type="text" formControlName="email">
+        </label>
+        <label>
+            Phone Number:
+            <input type="text" formControlName="phone">
+        </label>
+        <label>
+            Linkedin:
+            <input type="text" formControlName="linkedin">
+        </label>
+        <label>
+            Graduation Date:
+            <input type="text" formControlName="graduationDate">
+        </label>
+        <label>
+            University:
+            <input type="text" formControlName="university">
+        </label>
+        <label>
+            Role:
+            <input type="text" formControlName="role">
+        </label>
+        <label>
+            Office Locations:
+            <input type="text" formControlName="locations">
+            </label>
+        <label>
+            Resume:
+            <input type="text" formControlName="resume">
+        </label>
+        <label>
+            Interview Stage:
+            <input type="text" formControlName="interviewStage">
+        </label>
+        <label>
+            Inteview Feedback:
+            <input type="text" formControlName="interviewFeedback">
+        </label>
+        <div>
+            <button id="showForm" (click)="showForm=false">Close</button>
+            <button *ngIf="!isEditMode" (click)="updateItem()">Edit Item</button>
+            <button *ngIf="isEditMode" (click)="submitChanges()">Submit Changes</button>
+        </div>  
+    </form>
+    
+</div>
+</body>
+
+<h2>Candidate Table</h2>
+    <div class="container">
+        <div>
+            <button (click)="deleteSelected()" type="button" id="deleteSelected">Delete Selected</button>
+            <button type="button" id="addApplicant">Add Applicant</button>
+            <button (click)="resetTable()" type="button" id="reset">Reset Table</button>
+        </div>
+        <form (submit)="onSearch(); $event.preventDefault()" class="search-form">
+            <input [(ngModel)]="searchQuery" #searchInput type="search" name="q" placeholder="Look up name">
+            <button type="submit"><i class="fas fa-search"></i></button> <!-- Font Awesome search icon -->
+        </form>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="checkbox-column"></th>
+                <th class="view-column"></th>
+                <th class="fname">First Name</th>
+                <th class="lname">Last Name</th>
+                <th class="email">Email</th>
+                <th class="phone">Phone Number</th>
+                <th class="gradDate">Graduation Date</th>
+                <th class="university">University</th>
+                <th class="role">Role</th>
+                <th class="locations">Locations</th>
+                <th class="resume">Resume</th>
+                <th class="interviewStage">Interview Stage</th>
+                <th class="interviewFeedback">Interview Feedback</th>
+                <th class="evaluation">Evaluation </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data">
+                <td><input type="checkbox" [(ngModel)]="item.selected"></td>
+                <td class="view-column">
+                    <button (click)="viewItem(item); showForm=true">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </td>
+                <td>{{item.firstName}}</td>
+                <td>{{item.lastName}}</td>
+                <td>{{item._id}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.graduationDate}}</td>
+                <td>{{item.university}}</td>
+                <td>{{item.role}}</td>
+                <td>{{item.officeLocations}}</td>
+                <td>{{item.resume}}</td>
+                <td>{{item.interviewStage}}</td>
+                <td>{{item.interviewFeedback}}</td>
+                <td>{{item.evaluation}}</td>
+            </tr>
+        </tbody>
+    </table>
