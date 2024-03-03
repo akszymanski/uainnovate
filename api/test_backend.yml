@@ -1,0 +1,17 @@
+{"_id":"65e381ae0de3a39fcb8d3be2","firstName":"Ally","lastName":"Szymanski","email":"akszymanski@crimson.ua.edu","phone":"586-244-2587","officeLocations":["birmingham","huntsville","tuscaloosa"],"linkedin":"linkedin.com","graduationDate":"Dec-2024","school":"AL - University of Alabama","interviewStage":"Final","interviewFeedback":"awesome","evaluationMetric":2}
+
+curl -X POST -H "Content-Type: application/json" -d '{"_id":"65b381ad0de3359fcb8d3be2","firstName":"Ally","lastName":"Szymanski","email":"akszymanski@crimson.ua.edu","phone":"586-244-2587","officeLocations":["birmingham","huntsville","tuscaloosa"],"linkedin":"linkedin.com","graduationDate":"Dec-2024","school":"AL - University of Alabama","interviewStage":"Final","interviewFeedback":"awesome","evaluationMetric":2}' http://localhost:5038/api/AddStudent
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Ally","lastName":"Szymanski","email":"akszymanski@crimson.ua.edu","phone":"586-244-2587", "role":"Intern", "officeLocations":["birmingham","huntsville","tuscaloosa"],"linkedin":"linkedin.com","graduationDate":"Dec-2024","school":"AL - University of Alabama","interviewStage":"Final","interviewFeedback":"awesome","evaluationMetric":2}' http://localhost:5038/api/AddStudentHR
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Holland","lastName":"Henderson-Boyer","email":"hrhendersonboyer@crimson.ua.edu", "role":"Full-Time"}' http://localhost:5038/api/AddStudent
+
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Holland","lastName":"Henderson-Boyer","email":"akszymanski@crimson.ua.edu","phone":"586-244-2587","officeLocations":["seattle","new york","sunnyvale"],"linkedin":"linkedin.com","graduationDate":"May-2026","school":"AL - University of Alabama","interviewStage":"Final","interviewFeedback":"awesome","evaluationMetric":2}' http://localhost:5038/api/UpdateStudentHR
+
+curl -X GET -H "Content-Type: application/json" -d '{}' http://localhost:5038/api/GetStudent/akszymanski@crimson.ua.edu
+
+curl -X GET -H "Content-Type: application/json" -d '{}' http://localhost:5038/api/SearchStudents/Holland Henderson-Boyer
