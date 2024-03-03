@@ -16,6 +16,8 @@ export class HrComponent implements OnInit {
   searchQuery: string = '';
   showForm = false;
   possibleLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile', 'Location1', 'Location2', 'Location3', 'Location4', 'Location5'];
+  resumeLink: any;
+
 
   constructor(private http: HttpClient) {
     this.itemForm = new FormGroup({
@@ -52,6 +54,12 @@ export class HrComponent implements OnInit {
     
   }
 
+  downloadResume(): void {
+    if (this.resumeLink) {
+        this.resumeLink.click();
+    }
+}
+
   resetTable(): void {
     this.http.get<any[]>('http://localhost:5038/api/GetData').subscribe((response: any[]) => {
       this.data = response;
@@ -61,21 +69,60 @@ export class HrComponent implements OnInit {
 
   viewItem(item: any): void {
     this.showForm = true;
-    this.itemForm.patchValue({
-      'firstName': item.firstName,
-      'lastName': item.lastName,
-      'email': item._id,
-      'phone': item.phone,
-      'linkedin': item.linkedin,
-      'graduationDate': item.graduationDate,
-      'university': item.university,
-      'role': item.role,
-      'locations': item.officeLocations,
-      'resume': item.resume,
-      'interviewStage:': item.interviewStage,
-      'interviewFeedback': item.interviewFeedback,
-      'evaluation': item.evaluationMetric,
-    });
+    var pdflink: any;
+
+    this.http.get('http://localhost:5038/api/GetStudent/' + item._id)
+        .subscribe(
+          response => {
+            console.log('Submission successful:', response);
+            console.log('Done');
+
+            if(response != null){
+              this.http.get('http://localhost:5038/api/GetStudentFile/' + item._id, { responseType: 'blob' })
+              .subscribe(
+                  file => {
+                      console.log('Received file:', file);
+
+                      // Handle the file
+                      let url = URL.createObjectURL(file);
+                      let link = document.createElement('a');
+                      link.href = url;
+                      link.download = `${item._id}.pdf`;
+                      pdflink = link;
+                      this.resumeLink = pdflink;
+                      link.click();
+
+                      this.itemForm.patchValue({
+                        'firstName': item.firstName,
+                        'lastName': item.lastName,
+                        'email': item._id,
+                        'phone': item.phone,
+                        'linkedin': item.linkedin,
+                        'graduationDate': item.graduationDate,
+                        'university': item.university,
+                        'role': item.role,
+                        'locations': item.officeLocations,
+                        'resume': pdflink,
+                        'interviewStage:': item.interviewStage,
+                        'interviewFeedback': item.interviewFeedback,
+                        'evaluation': item.evaluationMetric,
+                      });
+                     
+                  },
+                  error => {
+                      console.error('Error getting file:', error);
+                  }
+              );
+            }
+
+          },
+          error => {
+            console.error('Error submitting application:', error);
+          }
+        );
+
+        
+
   }
 
   isEditMode = false;
