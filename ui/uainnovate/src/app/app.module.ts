@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SubmitStudentComponent } from './submit-student/submit-student.component';
 import { StudentComponent } from './student/student.component';
+import { StudentLoginComponent } from './student-login/student-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         HomeComponent, // Add HomeComponent to imports
         SubmitStudentComponent,
         StudentComponent,
+        StudentLoginComponent,
     ],
     imports: [
         BrowserModule,
