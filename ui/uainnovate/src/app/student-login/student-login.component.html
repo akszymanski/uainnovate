@@ -1,4 +1,15 @@
+<style>
+    h1{
+        font-family: "Source Sans Pro", Arial;
+        color: #333;
+    }
+</style>
+<div class="header">
+    <h1>Enter your email to access your profile.</h1>
+</div>
+
 <div class="form-container">
+    
     <form [formGroup]="jobApplicationForm" (ngSubmit)="onSubmit()" class="form-content">
         <div class="form-group">
             <label class="form-label" for="email">Email:</label>
@@ -7,5 +18,6 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-
+    </form>
+</div>
 
