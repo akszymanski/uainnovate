@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'; // Import Router from @angular/router
 
 @Component({
   selector: 'app-submit-student',
@@ -11,7 +12,7 @@ export class StudentLoginComponent implements OnInit {
   jobApplicationForm: FormGroup = {} as FormGroup;
   officeLocations = ['Location 1', 'Location 2', 'Location 3', 'Location 4'];
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -24,12 +25,20 @@ export class StudentLoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log("onsubmit");
     if (this.jobApplicationForm.valid) {
       // Send data to the server
-      this.http.post('http://localhost:5038/api/GetStudent', this.jobApplicationForm.value)
+      console.log(this.jobApplicationForm.value);
+      this.http.get('http://localhost:5038/api/GetStudent/' + this.jobApplicationForm.value.email, this.jobApplicationForm.value)
         .subscribe(
           response => {
             console.log('Submission successful:', response);
+
+            if(response != null){
+              this.router.navigate(['/update-student'], { state: { email: this.jobApplicationForm.value.email } });
+            }
+
+
             // Optionally, reset the form after successful submission
             this.jobApplicationForm.reset();
           },
