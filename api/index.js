@@ -63,7 +63,7 @@ app.post('/api/AddStudentHR', multer().none(), (request, response) => {
         role: request.body.role,
         linkedin: request.body.linkedin,
         graduationDate: request.body.graduationDate,
-        school: request.body.school,
+        university: request.body.university,
         interviewStage: request.body.interviewStage,
         interviewFeedback: request.body.interviewFeedback,
         evaluationMetric: request.body.evaluationMetric
@@ -92,7 +92,7 @@ app.post('/api/UpdateStudentHR', multer().none(), (request, response) => {
         linkedin: request.body.linkedin,
         graduationDate: request.body.graduationDate,
         role: request.body.role,
-        school: request.body.school,
+        university: request.body.university,
         interviewStage: request.body.interviewStage,
         interviewFeedback: request.body.interviewFeedback,
         evaluationMetric: request.body.evaluationMetric
@@ -140,7 +140,7 @@ app.post('/api/UpdateStudent', multer().none(), (request, response) => {
         officeLocations: request.body.officeLocations,
         linkedin: request.body.linkedin,
         graduationDate: request.body.graduationDate,
-        school: request.body.school,
+        university: request.body.university,
         role: request.body.role
 
     };
@@ -168,7 +168,7 @@ app.post('/api/AddStudent', multer().none(), (request, response) => {
         officeLocations: request.body.officeLocations,
         linkedin: request.body.linkedin,
         graduationDate: request.body.graduationDate,
-        school: request.body,
+        university: request.body.university,
         role: request.body.role,
         interviewStage: null,
         interviewFeedback: null,
