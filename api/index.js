@@ -1,16 +1,35 @@
 var Express = require("express");
 var MongoClient = require("mongodb").MongoClient;
+const fs = require('fs');
 var cors = require("cors");
 var multer = require("multer");
+GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
+const GridFSBucket = require('mongodb').GridFSBucket;
+const streamToBuffer = require('stream-to-buffer');
+
+
 
 var app = Express();
 app.use(cors());
 app.use(Express.json());
 
 
-var CONNECTION_URL = "mongodb+srv://uainnovate:qhHSn7lPYrcSRFvN@cluster0.fdvzwdt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+var CONNECTION_URL = "mongodb+srv://uainnovate:qhHSn7lPYrcSRFvN@cluster0.fdvzwdt.mongodb.net/uainnovatedb?retryWrites=true&w=majority&appName=Cluster0";
 var DATABASE_NAME = "uainnovatedb";
 var database, client;
+
+const storage = new GridFsStorage({
+    url: CONNECTION_URL,
+    database: DATABASE_NAME,
+    file: (req, file) => {
+      return {
+        bucketName: 'resumes',       // Setting the collection name for the files
+        filename: `${req.body.email}`  // The name under which the file will be stored
+      }
+    }
+  });
+
+const upload = multer({ storage });
 
 app.listen(5038, () => {
     MongoClient.connect(CONNECTION_URL, (error, dbClient) => {
@@ -153,7 +172,7 @@ app.post('/api/UpdateStudent', multer().none(), (request, response) => {
 });
 
 
-app.post('/api/AddStudent', multer().none(), (request, response) => {
+app.post('/api/AddStudent', upload.single('resume'), (request, response) => {
     console.log("In post");
     console.log(request.body);
     const collection = database.collection("uainnovatecollection");
@@ -178,14 +197,18 @@ app.post('/api/AddStudent', multer().none(), (request, response) => {
             console.error('Error inserting document: ', error);
             response.status(500).send(error);
         } else {
+            console.log(request.file);
             response.send(result);
         }
     });
+    
+    
 });
 
 
 //search for a single student by email
 app.get('/api/GetStudent/:email', (request, response) => {
+
     const collection = database.collection("uainnovatecollection");
     collection.findOne({ _id: request.params.email }, (error, result) => {
         if (error) {
@@ -193,33 +216,31 @@ app.get('/api/GetStudent/:email', (request, response) => {
             response.status(500).send('Internal Server Error');
             return;
         }
-
         response.send(result);
+
     });
 });
 
-app.get('/api/SearchStudents/:firstName/:lastName', (request, response) => {
-    const collection = database.collection("uainnovatecollection");
-    console.log(request.params.firstName);
-    console.log(request.params.lastName);
-    if (request.params.firstName == "null") {
-        request.params.firstName = "";
-    }
-    if (request.params.lastName == "null") {
-        request.params.lastName = "";
-    }
-    
-    //const name = firstName + " " + lastName;
-    collection.find({ $or: [{ firstName: request.params.firstName }, { lastName: request.params.lastName }, {lastName: request.params.firstName}, {firstName: request.params.lastName}] }).toArray((error, result) => {
-        if (error) {
-            console.error('Error occurred while fetching data from MongoDB Atlas...\n', error);
-            response.status(500).send('Internal Server Error');
-            return;
-        }
+app.get('/api/GetStudentFile/:email', (request, response) => {
+    let bucket = new GridFSBucket(database, {
+                    bucketName: 'resumes'
+                });
+    let downloadStream = bucket.openDownloadStreamByName(request.params.email);
 
-        response.send(result);
+    downloadStream.on('data', (chunk) => {
+        response.write(chunk);
+    });
+
+    downloadStream.on('error', (err) => {
+        console.error('Error occurred while streaming file...\n', err);
+        response.status(500).send('Internal Server Error');
+    });
+
+    downloadStream.on('end', () => {
+        response.end();
     });
 });
+
 
 //filter on office location, fulltime vs internship
 
