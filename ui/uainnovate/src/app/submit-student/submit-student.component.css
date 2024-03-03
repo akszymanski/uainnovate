@@ -1,8 +1,12 @@
 .form-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: top;
     height: 100vh; /* adjust as needed */
+  }
+  .header{
+    text-align: center;
+    font-family: "Source Sans Pro", Arial;
   }
   
   .form-content {
@@ -12,10 +16,12 @@
   .form-content .form-group {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: top;
+    margin: 10px;
   }
   
   .form-content .form-label {
+    font-family: "Source Sans Pro", Arial;
     font-size: 1.5em; /* adjust as needed */
   }
   
@@ -25,7 +31,7 @@
   }.form-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: top;
     height: 100vh; /* adjust as needed */
   }
   
@@ -40,6 +46,7 @@
   }
   
   .form-content .form-label {
+    font-family: "Source Sans Pro", Arial;
     font-size: 1.5em; /* adjust as needed */
   }
   
@@ -47,3 +54,18 @@
     height: 50px; /* adjust as needed */
     font-size: 1.2em; /* adjust as needed */
   }
+
+  button{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #5236ab;
+    color: white;
+    border: none;
+    border-radius: 50px; /* This makes the button rounded */
+    text-decoration: none;
+    margin-right: 20px;
+  }
+  
