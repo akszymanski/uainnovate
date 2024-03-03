@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SubmitStudentComponent } from './submit-student/submit-student.component';
 import { StudentComponent } from './student/student.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateStudentComponent } from './update-student/update-student.component';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         HomeComponent, // Add HomeComponent to imports
         SubmitStudentComponent,
         StudentComponent,
+        UpdateStudentComponent,
     ],
     imports: [
         BrowserModule,

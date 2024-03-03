@@ -1,0 +1,50 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* adjust as needed */
+  }
+  
+  .form-content {
+    width: 50%; /* adjust as needed */
+  }
+  
+  .form-content .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .form-content .form-label {
+    font-size: 1.5em; /* adjust as needed */
+  }
+  
+  .form-content .form-control {
+    height: 50px; /* adjust as needed */
+    font-size: 1.2em; /* adjust as needed */
+  }.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* adjust as needed */
+  }
+  
+  .form-content {
+    width: 50%; /* adjust as needed */
+  }
+  
+  .form-content .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .form-content .form-label {
+    font-size: 1.5em; /* adjust as needed */
+  }
+  
+  .form-content .form-control {
+    height: 50px; /* adjust as needed */
+    font-size: 1.2em; /* adjust as needed */
+  }
+  

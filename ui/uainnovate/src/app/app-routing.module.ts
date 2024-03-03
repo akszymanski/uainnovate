@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect to home page by default
   { path: 'student', component: StudentComponent },
   { path: 'hr', component: HrComponent },
-  { path: 'submit-student', component: SubmitStudentComponent }
+  { path: 'submit-student', component: SubmitStudentComponent },
+
 ];
 
 
