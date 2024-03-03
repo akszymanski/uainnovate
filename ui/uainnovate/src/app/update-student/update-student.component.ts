@@ -15,15 +15,15 @@ import {Router} from '@angular/router';
 })
 export class UpdateStudentComponent {
   jobApplicationForm: FormGroup = {} as FormGroup;
-  officeLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile'];
+  possibleLocations = ['Birmingham', 'Montgomery', 'Huntsville', 'Troy', 'Mobile'];
   email = '';
   //result: any;
-  data: any[] = [];
+  data: any = {};
   fname = '';
   lname = '';
   phone1 = '';
   role1 = '';
-  officelocations = '';
+  officeLocations = '';
   resume1 = null;
   graddate = ''
   university1 = '';
@@ -39,42 +39,33 @@ export class UpdateStudentComponent {
       console.log('test: ', state.email);
       this.http.get<any[]>('http://localhost:5038/api/GetStudent/'+ this.email).subscribe((response: any[]) => {
         this.data = response;
-        console.log("data: ",this.data);
+        if (Array.isArray(this.data) && this.data.length > 0) {
+          this.fname = this.data[0].firstName;
+          this.lname = this.data[0].lastName;
+          this.phone1 = this.data[0].phone;
+          this.role1 = this.data[0].role;
+          this.officeLocations = this.data[0].officeLocations;
+          this.resume1 = this.data[0].resume;
+          this.graddate = this.data[0].graduationDate;
+          this.university1 = this.data[0].university;
+          this.linkedin1 = this.data[0].linkedin;
+        } else if (this.data && typeof this.data === 'object') {
+          this.fname = this.data.firstName;
+          this.lname = this.data.lastName;
+          this.phone1 = this.data.phone;
+          this.role1 = this.data.role;
+          this.officeLocations = this.data.officeLocations;
+          this.resume1 = this.data.resume;
+          this.graddate = this.data.graduationDate;
+          this.university1 = this.data.university;
+          this.linkedin1 = this.data.linkedin;
+        } else {
+          console.log('Data is not an array or an object');
+        }
       });
 
-      // this.http.get('http://localhost:5038/api/GetStudent/'+ this.email, this.jobApplicationForm.value)
-      //   .subscribe(
-      //     response => {
-      //       console.log('Submission successful1:', response);
-      //       //this.fname = response.firstName;
-      //       // Optionally, reset the form after successful submission
-      //       //this.jobApplicationForm.reset();
-      //       const blob = new Blob([response], {type: 'application/json'})
-      //       const reader = new FileReader();
-      //       reader.readAsText(blob);
-      //       reader.onloadend = () => {
-      //         const result = JSON.parse(reader.result as string);
-      //         console.log(result); // This will log the JSON object
-      //       };
-      //       //this.email = this.result.email;
-      //       this.fname = this.result.firstName;
-      //       this.lname = this.result.lastName;
-      //       this.phone1 = this.result.phone;
-      //       this.role1 = this.result.role;
-      //       this.officelocations = this.result.officeLocations;
-      //       this.resume1 = null; //FIXME
-      //       this.graddate = this.result.graduationDate;
-      //       this.university1 = this.result.university;
-      //       this.linkedin1 = this.result.linkedin;
-      //         //email: this.result.email;
-      //         // Set other form fields here
-            
-            
-      //   },
-      //     error => {
-      //       console.error('Error submitting application:', error);
-      //     }
-      //   )
+      
+  
    
       
     this.initForm();
@@ -89,28 +80,13 @@ export class UpdateStudentComponent {
       email: [this.email, [Validators.required, Validators.email]],
       phone: [this.phone1, Validators.required],
       role: [this.role1, Validators.required],
-      officeLocations: [this.officelocations],
+      officeLocations: [this.officeLocations],
       resume: [this.resume1, Validators.required],
       graduationDate: [this.graddate, Validators.required],
       university: [this.university1, Validators.required],
       linkedin: [this.linkedin1]
     });
 
-    // onSubmit(): void {
-    //   if (this.jobApplicationForm.valid) {
-    //     // Send data to the server04 Not Fou
-    //     this.http.post('http://localhost:5038/api/AddStudent', this.jobApplicationForm.value)
-    //       .subscribe(
-    //         response => {
-    //           console.log('Submission successful:', response);
-    //           // Optionally, reset the form after successful submission
-    //           this.jobApplicationForm.reset();
-    //         },
-    //         error => {
-    //           console.error('Error submitting application:', error);
-    //         }
-    //       );
-    //   }
-    // }
+
 }
 }
