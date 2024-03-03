@@ -114,7 +114,7 @@ app.post('/api/DeleteStudent', multer().none(), (request, response) => {
     console.log("In post");
     console.log(request.body);
     const collection = database.collection("uainnovatecollection");
-    collection.deleteOne({ _id: request.body.email }, (error, result) => {
+    collection.deleteOne({ _id: request.body._id }, (error, result) => {
         if (error) {
             console.error('Error inserting document: ', error);
             response.status(500).send(error);
@@ -123,8 +123,6 @@ app.post('/api/DeleteStudent', multer().none(), (request, response) => {
         }
     });
 });
-
-
 
 
 //CRUD operations for Student
