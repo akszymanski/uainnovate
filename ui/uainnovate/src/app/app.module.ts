@@ -12,6 +12,7 @@ import { UpdateStudentComponent } from './update-student/update-student.componen
 import { HrModule } from './hr/hr.module';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CreateStudentHRComponent } from './create-student-hr/create-student-hr.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
         StudentComponent,
         StudentLoginComponent,
         UpdateStudentComponent,
+        CreateStudentHRComponent,
     ],
     imports: [
         BrowserModule,
